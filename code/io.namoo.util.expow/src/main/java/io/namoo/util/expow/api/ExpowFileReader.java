@@ -109,17 +109,21 @@ public class ExpowFileReader {
 		while (rowIter.hasNext()) {
 			Row row = rowIter.next();
 			ExpowRowLib expowRow = new ExpowRowLib(rowIndex);
-			Iterator<Cell> cellIter = row.iterator();
+			
+			int lastColumn = row.getLastCellNum(); 
+			for(int columnIndex = 0; columnIndex<lastColumn; columnIndex++) {
+				// 
+				Cell cell = row.getCell(columnIndex, Row.RETURN_BLANK_AS_NULL); 
 
-			int columnIndex = 0;
-			while (cellIter.hasNext()) {
-				Cell cell = cellIter.next();
-				ExpowCellLib powCell = new ExpowCellLib(rowIndex, columnIndex, cell.getCellType(),
-						getCellValueAsString(cell));
-
+				ExpowCellLib powCell = null; 
+				if(cell == null) {
+					powCell = new ExpowCellLib(rowIndex, columnIndex, Cell.CELL_TYPE_BLANK, ""); 
+				} else {
+					powCell = new ExpowCellLib(rowIndex, columnIndex, cell.getCellType(),
+							getCellValueAsString(cell));
+				}
 				expowRow.addCell(powCell);
 				expowSheet.requestColumnExpanding(columnIndex).addCell(powCell);
-				columnIndex++;
 			}
 			expowSheet.addRow(expowRow);
 			rowIndex++;
@@ -129,9 +133,9 @@ public class ExpowFileReader {
 	private static String getCellValueAsString(Cell cell) {
 		//
 		String cellValue = "";
-
-		switch (cell.getCellType()) {
+		switch (cell.getCellType()) { 
 		case Cell.CELL_TYPE_BLANK:
+			cellValue = ""; 
 			break;
 		case Cell.CELL_TYPE_BOOLEAN:
 			cellValue = String.valueOf(cell.getBooleanCellValue());

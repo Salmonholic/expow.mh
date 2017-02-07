@@ -161,7 +161,7 @@ public class ExpowSheetLib implements ExpowSheet {
 	@Override
 	public ExpowColumn requestColumnExpanding(int index) {
 		// 
-		if (index == columns.size()) {
+		if (index >= columns.size()) {
 			columns.add(new ExpowColumnLib(index)); 
 		}
 		

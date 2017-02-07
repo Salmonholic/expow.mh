@@ -15,7 +15,7 @@ import io.namoo.util.expow.api.ExpowRow;
 
 public class ExpowRowLib implements ExpowRow {
 	//
-	public static final int IndexLimit = 5000; 
+	public static final int IndexLimit = 500000; 
 
 	private int rowIndex; 
 	private List<ExpowCell> rowCells; 
@@ -83,7 +83,7 @@ public class ExpowRowLib implements ExpowRow {
 	}
 
 	@Override
-	public ListIterator<ExpowCell> requestCellsFrom(String valueStr) {
+	public ListIterator<ExpowCell> requestCellsIteratorFrom(String valueStr) {
 		// 
 		int targetIndex = -1; 
 		for(ExpowCell cell : rowCells) {
@@ -100,6 +100,12 @@ public class ExpowRowLib implements ExpowRow {
 		}
 
 		return rowCells.listIterator(targetIndex+1); 
+	}
+	
+	@Override
+	public ListIterator<ExpowCell> requestCellsIterator() {
+		// 
+		return rowCells.listIterator(0); 
 	}
 
 	@Override

@@ -17,7 +17,7 @@ public class ExpowFileDemo {
 		ExpowFile file = ExpowFileReader.read(fileName); 
 		ExpowSheet powSheet = file.requestSheet("SoftwareDevelopment"); 
 		readColumnTest(powSheet); 
-		readRowTest(powSheet); 
+		// readRowTest(powSheet); 
 	}
 	
 	public static void readColumnTest(ExpowSheet powSheet) {
@@ -29,7 +29,7 @@ public class ExpowFileDemo {
 			if (!cell.isEmpty()) {
 				ExpowRow skillRow = powSheet.requestRowKeyRow(cell.getValue()); 
 				ExpowCell rowCell = skillRow.requestCell(cell.getColumnIndex()+2); 
-				System.out.println(rowCell.toString()); 
+				System.out.println(rowCell.toPrettyJson());  
 			}
 		}
 	}
@@ -37,7 +37,7 @@ public class ExpowFileDemo {
 	public static void readRowTest(ExpowSheet powSheet) {
 		//
 		ExpowRow roleRow = powSheet.requestRowKeyRow("요구조건");
-		Iterator<ExpowCell> cellIter = roleRow.requestCellsFrom("요구조건");
+		Iterator<ExpowCell> cellIter = roleRow.requestCellsIteratorFrom("요구조건");
 		while(cellIter.hasNext()) {
 			ExpowCell cell = cellIter.next(); 
 			if (!cell.isEmpty()) {

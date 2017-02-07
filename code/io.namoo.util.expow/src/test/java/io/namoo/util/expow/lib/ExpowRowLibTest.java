@@ -86,17 +86,17 @@ public class ExpowRowLibTest {
 	}
 
 	@Test
-	public void testRequestCellsFrom() throws Exception {
-		//
-		ListIterator<ExpowCell> cellIter = rowWithMultiCells.requestCellsFrom("My"); 
-		assertEquals("Friends", cellIter.next().getValue()); 
-	}
+		public void testRequestCellsIteratorFrom() throws Exception {
+			//
+			ListIterator<ExpowCell> cellIter = rowWithMultiCells.requestCellsIteratorFrom("My"); 
+			assertEquals("Friends", cellIter.next().getValue()); 
+		}
 
 	@Test(expected=NoSuchElementException.class)
-	public void testRequestCellsFromWithNoSuchElementException() throws Exception {
-		//
-		ListIterator<ExpowCell> cellIter = rowWithMultiCells.requestCellsFrom("Ghost"); 
-	} 
+		public void testRequestCellsIteratorFromWithNoSuchElementException() throws Exception {
+			//
+			ListIterator<ExpowCell> cellIter = rowWithMultiCells.requestCellsIteratorFrom("Ghost"); 
+		} 
 	
 	@Test
 	public void testHasCellValue() throws Exception {

@@ -11,7 +11,8 @@ public interface ExpowRow {
 	public ExpowCell requestCell(int columnIndex);
 	public ExpowCell requestCell(String valueStr);
 	public ExpowCell requestRightCellOf(String valueStr); 
-	public ListIterator<ExpowCell> requestCellsFrom(String valueStr); 
+	public ListIterator<ExpowCell> requestCellsIteratorFrom(String valueStr);
+	public ListIterator<ExpowCell> requestCellsIterator(); 
 	public int countCells();
 	public int getRowIndex();
 }
