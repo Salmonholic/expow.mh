@@ -101,6 +101,7 @@ public class ExpowFileReader {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	private static void fillSheet(XSSFSheet sheet, ExpowSheet expowSheet) {
 		//
 		Iterator<Row> rowIter = sheet.iterator();
@@ -130,6 +131,7 @@ public class ExpowFileReader {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	private static String getCellValueAsString(Cell cell) {
 		//
 		String cellValue = "";

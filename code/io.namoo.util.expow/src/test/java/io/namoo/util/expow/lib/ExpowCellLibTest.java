@@ -7,10 +7,10 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.junit.Before;
 import org.junit.Test;
 
+@SuppressWarnings("deprecation")
 public class ExpowCellLibTest {
 	//
 	private ExpowCellLib cell; 
-	private ExpowCellLib badCell; 
 	
 	@Before
 	public void setUp() throws Exception {
@@ -25,21 +25,12 @@ public class ExpowCellLibTest {
 	}
 
 	@Test(expected=IllegalArgumentException.class)
-	public void testExpowCellWithBadTypeWithIllegalArgumentException() {
-		//
-		int rowIndex = 0; 
-		int columnIndex = 0; 
-		int badTypeValue = 100; 
-		this.badCell = new ExpowCellLib(rowIndex, columnIndex, badTypeValue, "BadCell"); 
-	}
-
-	@Test(expected=IllegalArgumentException.class)
 	public void testExpowCellWithNullValueWithIllegalArgumentException() {
 		//
 		int rowIndex = 0; 
 		int columnIndex = 0; 
 		int cellType = Cell.CELL_TYPE_STRING; 
-		this.badCell = new ExpowCellLib(rowIndex, columnIndex, cellType, null); 
+		new ExpowCellLib(rowIndex, columnIndex, cellType, null); 
 	}
 
 	@Test

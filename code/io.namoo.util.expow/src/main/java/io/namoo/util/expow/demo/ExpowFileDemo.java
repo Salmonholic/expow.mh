@@ -13,37 +13,40 @@ public class ExpowFileDemo {
 	//
 	public static void main(String[] args) { 
 		//
-		String fileName = "./src/test/resources/SK_Skill_Role_Map_151021.xlsx";
+		String fileName = "./src/test/resources/SkillRoleMap.xlsx";
 		ExpowFile file = ExpowFileReader.read(fileName); 
 		ExpowSheet powSheet = file.requestSheet("SoftwareDevelopment"); 
-		readColumnTest(powSheet); 
-		// readRowTest(powSheet); 
+		// readColumnTest(powSheet); 
+		readRowTest(powSheet); 
 	}
 	
 	public static void readColumnTest(ExpowSheet powSheet) {
 		//
 		ExpowColumn skillColumn = powSheet.requestColumnKeyColumn("단위기술");
-		Iterator<ExpowCell> cellIter = skillColumn.requestCellsFrom("단위기술"); 
-		while(cellIter.hasNext()) {
-			ExpowCell cell = cellIter.next(); 
-			if (!cell.isEmpty()) {
-				ExpowRow skillRow = powSheet.requestRowKeyRow(cell.getValue()); 
-				ExpowCell rowCell = skillRow.requestCell(cell.getColumnIndex()+2); 
-				System.out.println(rowCell.toPrettyJson());  
-			}
+		Iterator<ExpowCell> columnCellIter = skillColumn.requestCellsFrom("단위기술"); 
+		while(columnCellIter.hasNext()) {
+			ExpowCell columnCell = columnCellIter.next(); 
+			System.out.println(columnCell.toJson()); 
+			//if (!cell.isEmpty()) {
+			//	ExpowRow skillRow = powSheet.requestRowKeyRow(cell.getValue()); 
+			//	ExpowCell rowCell = skillRow.requestCell(cell.getColumnIndex()+1); 
+			//	System.out.println(rowCell.toJson());  
+			//}
 		}
 	}
 
 	public static void readRowTest(ExpowSheet powSheet) {
 		//
-		ExpowRow roleRow = powSheet.requestRowKeyRow("요구조건");
-		Iterator<ExpowCell> cellIter = roleRow.requestCellsIteratorFrom("요구조건");
-		while(cellIter.hasNext()) {
-			ExpowCell cell = cellIter.next(); 
-			if (!cell.isEmpty()) {
-				ExpowRow skillRow = powSheet.requestRowKeyRow(cell.getValue()); 
-				ExpowCell rowCell = skillRow.requestCell(cell.getColumnIndex()+2); 
-			}
+		ExpowRow roleRow = powSheet.requestRowKeyRow("Java");
+		Iterator<ExpowCell> rowCellIter = roleRow.requestCellsIteratorFrom("Java");
+		while(rowCellIter.hasNext()) {
+			ExpowCell rowCell = rowCellIter.next(); 
+			System.out.println(rowCell.toJson());
+			
+			//if (!cell.isEmpty()) {
+			//	ExpowRow skillRow = powSheet.requestRowKeyRow(cell.getValue()); 
+			//	ExpowCell rowCell = skillRow.requestCell(cell.getColumnIndex()+2); 
+			// }
 		}
 		
 //		ListIterator<PowCell> cellIter = powSheet.requestAllUnderCellsOf("서버개발자(L39)"); 

@@ -13,6 +13,7 @@ import org.junit.Test;
 
 import io.namoo.util.expow.api.ExpowCell;
 
+@SuppressWarnings("deprecation")
 public class ExpowColumnLibTest {
 	//
 	private ExpowColumnLib columnWithSingleCell; 

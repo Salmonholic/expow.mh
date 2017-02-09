@@ -14,6 +14,7 @@ import org.junit.Test;
 
 import io.namoo.util.expow.api.ExpowCell;
 
+@SuppressWarnings("deprecation")
 public class ExpowRowLibTest {
 	// 
 	private ExpowRowLib rowWithSingleCell; 
@@ -92,12 +93,6 @@ public class ExpowRowLibTest {
 			assertEquals("Friends", cellIter.next().getValue()); 
 		}
 
-	@Test(expected=NoSuchElementException.class)
-		public void testRequestCellsIteratorFromWithNoSuchElementException() throws Exception {
-			//
-			ListIterator<ExpowCell> cellIter = rowWithMultiCells.requestCellsIteratorFrom("Ghost"); 
-		} 
-	
 	@Test
 	public void testHasCellValue() throws Exception {
 		//
