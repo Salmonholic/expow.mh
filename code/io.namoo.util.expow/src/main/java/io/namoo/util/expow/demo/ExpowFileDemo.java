@@ -16,8 +16,8 @@ public class ExpowFileDemo {
 		String fileName = "./src/test/resources/SkillRoleMap.xlsx";
 		ExpowFile file = ExpowFileReader.read(fileName); 
 		ExpowSheet powSheet = file.requestSheet("SoftwareDevelopment"); 
-		// readColumnTest(powSheet); 
-		readRowTest(powSheet); 
+		readColumnTest(powSheet); 
+		// readRowTest(powSheet); 
 	}
 	
 	public static void readColumnTest(ExpowSheet powSheet) {
@@ -26,7 +26,7 @@ public class ExpowFileDemo {
 		Iterator<ExpowCell> columnCellIter = skillColumn.requestCellsFrom("단위기술"); 
 		while(columnCellIter.hasNext()) {
 			ExpowCell columnCell = columnCellIter.next(); 
-			System.out.println(columnCell.toJson()); 
+			System.out.println(columnCell.toPrettyJson()); 
 			//if (!cell.isEmpty()) {
 			//	ExpowRow skillRow = powSheet.requestRowKeyRow(cell.getValue()); 
 			//	ExpowCell rowCell = skillRow.requestCell(cell.getColumnIndex()+1); 
