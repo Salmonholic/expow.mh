@@ -48,6 +48,26 @@ public class ExpowFileReader {
 		return expowFile; 
 	}
 
+	public static ExpowFile read(String fileName, int sheetIndex) {
+		// 
+		ExpowFileLib expowFile = new ExpowFileLib(fileName); 
+		XSSFWorkbook workbook = openWorkbook(fileName);
+		readSheet(workbook, expowFile, sheetIndex);
+		closeWorkbook(workbook);	
+		
+		return expowFile; 
+	}
+	
+	public static ExpowFile read(String fileName, int sheetIndex, int startIndex, int endIndex) {
+		// 
+		ExpowFileLib expowFile = new ExpowFileLib(fileName); 
+		XSSFWorkbook workbook = openWorkbook(fileName);
+		readSheet(workbook, expowFile, sheetIndex, startIndex, endIndex);
+		closeWorkbook(workbook);	
+		
+		return expowFile; 
+	}
+
 	private static XSSFWorkbook openWorkbook(String fileName) {
 		//
 		XSSFWorkbook workbook = null;
@@ -78,6 +98,38 @@ public class ExpowFileReader {
 			ExpowSheet expowSheet = new ExpowSheetLib(index, sheet.getSheetName());
 			fillSheet(sheet, expowSheet);
 			expowFile.addSheet(expowSheet);
+		}
+	}
+
+	private static void readSheet(XSSFWorkbook workbook, ExpowFileLib expowFile, int sheetIndex) {
+		//
+		int sheetCount = workbook.getNumberOfSheets();
+		for (int index = 0; index < sheetCount; index++) {
+			if (index != sheetIndex) {
+				continue; 
+			}
+			
+			XSSFSheet sheet = workbook.getSheetAt(index);
+			ExpowSheet expowSheet = new ExpowSheetLib(index, sheet.getSheetName());
+			fillSheet(sheet, expowSheet); 
+			expowFile.addSheet(expowSheet);
+			break; 
+		}
+	}
+
+	private static void readSheet(XSSFWorkbook workbook, ExpowFileLib expowFile, int sheetIndex, int startIndex, int endIndex) {
+		//
+		int sheetCount = workbook.getNumberOfSheets();
+		for (int index = 0; index < sheetCount; index++) {
+			if (index != sheetIndex) {
+				continue; 
+			}
+			
+			XSSFSheet sheet = workbook.getSheetAt(index);
+			ExpowSheet expowSheet = new ExpowSheetLib(index, sheet.getSheetName());
+			fillSheet(sheet, expowSheet, startIndex, endIndex); 
+			expowFile.addSheet(expowSheet);
+			break; 
 		}
 	}
 
@@ -117,6 +169,47 @@ public class ExpowFileReader {
 		int rowIndex = 0;
 		while (rowIter.hasNext()) {
 			Row row = rowIter.next();
+			ExpowRowLib expowRow = new ExpowRowLib(rowIndex);
+			
+			int lastColumn = row.getLastCellNum(); 
+			for(int columnIndex = 0; columnIndex<lastColumn; columnIndex++) {
+				// 
+				Cell cell = row.getCell(columnIndex, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK); 
+
+				ExpowCellLib powCell = new ExpowCellLib(
+						rowIndex, 
+						columnIndex, 
+						cell.getCellTypeEnum(), 
+						getCellValueAsString(cell));
+				expowRow.addCell(powCell);
+				expowSheet.requestColumnExpanding(columnIndex).addCell(powCell);
+			}
+			
+			expowSheet.addRow(expowRow);
+			rowIndex++;
+		}
+	}
+
+	@SuppressWarnings("deprecation")
+	private static void fillSheet(XSSFSheet sheet, ExpowSheet expowSheet, int startIndex, int endIndex) {
+		//
+		Iterator<Row> rowIter = sheet.iterator();
+
+		int rowIndex = 0;
+		while (rowIter.hasNext()) {
+			if (rowIndex == startIndex) {
+				break; 
+			}
+			Row row = rowIter.next();
+			rowIndex++; 
+		}
+		
+		while(rowIter.hasNext()) {
+			if (rowIndex == endIndex) {
+				break; 
+			}
+			
+			Row row = rowIter.next(); 
 			ExpowRowLib expowRow = new ExpowRowLib(rowIndex);
 			
 			int lastColumn = row.getLastCellNum(); 
