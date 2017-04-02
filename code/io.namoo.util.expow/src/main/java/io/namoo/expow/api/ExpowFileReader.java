@@ -10,11 +10,13 @@ package io.namoo.expow.api;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -28,6 +30,8 @@ import io.namoo.expow.lib.ExpowSheetLib;
 
 public class ExpowFileReader {
 	//
+	private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
 	public static ArrayFile readAsArray(String fileName) {
 		// 
 		ArrayFileLib arrayFile = new ArrayFileLib(fileName); 
@@ -143,8 +147,7 @@ public class ExpowFileReader {
 	private static String getCellValueAsString(Cell cell) {
 		//
 		String cellValue = "";
-		CellType cellType = cell.getCellTypeEnum(); 
-		switch (cellType) {  
+		switch (cell.getCellTypeEnum()) {  
 		case BLANK:
 			cellValue = ""; 
 			break;
@@ -158,7 +161,11 @@ public class ExpowFileReader {
 			cellValue = cell.getCellFormula();
 			break;
 		case NUMERIC:
-			cellValue = String.valueOf(cell.getNumericCellValue());
+			if (DateUtil.isCellDateFormatted(cell)) {
+				cellValue = dateFormat.format(cell.getDateCellValue()); 
+			} else {
+				cellValue = String.valueOf(cell.getNumericCellValue());
+			}
 			break;
 		case STRING:
 			cellValue = cell.getStringCellValue();

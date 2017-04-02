@@ -46,6 +46,19 @@ public class ExpowCellLib implements ExpowCell {
 		}
 	}
 
+	@Override
+	public String toString() {
+		// 
+		StringBuilder builder = new StringBuilder(); 
+		
+		builder.append("x:").append(x); 
+		builder.append(",y:").append(y); 
+		builder.append(", value:").append(value); 
+		builder.append(", type:").append(type); 
+
+		return builder.toString(); 
+	}
+	
 	public static ExpowCellLib getSample() {
 		//
 		return new ExpowCellLib(0, 0, CellType.STRING, "Hello"); 

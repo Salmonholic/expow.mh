@@ -20,7 +20,11 @@ public class XYCoord {
 
 	public String toString() {
 		// 
-		return (new StringBuilder()).append("[").append(x).append(":").append(y).append("]").toString(); 
+		StringBuilder builder = new StringBuilder(); 
+		
+		builder.append("[").append(x).append(":").append(y).append("]"); 
+		
+		return builder.toString(); 
 	}
 	
 	public int getX() {
