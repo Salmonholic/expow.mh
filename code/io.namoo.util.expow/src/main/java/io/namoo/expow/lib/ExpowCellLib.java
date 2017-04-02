@@ -5,14 +5,14 @@
  * @author <a href="mailto:tsong@nextree.co.kr">Song, Taegook</a>
  * @since 2014. 6. 10.
  */
-package io.namoo.util.expow.lib;
+package io.namoo.expow.lib;
 
-import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import io.namoo.util.expow.api.ExpowCell;
+import io.namoo.expow.api.ExpowCell;
 
 public class ExpowCellLib implements ExpowCell {
 	//
@@ -21,14 +21,14 @@ public class ExpowCellLib implements ExpowCell {
 	private int x; 
 	private int y; 
 	private String value; 
-	private int type;  
+	private CellType type;  
 	
-	public ExpowCellLib(int columnIndex, int cellType, String value) {
+	public ExpowCellLib(int columnIndex, CellType cellType, String value) {
 		// 
 		this(0, columnIndex, cellType, value);
 	}
 
-	public ExpowCellLib(int rowIndex, int columnIndex, int cellType, String value) {
+	public ExpowCellLib(int rowIndex, int columnIndex, CellType cellType, String value) {
 		// 
 		this.x = columnIndex; 
 		this.y = rowIndex; 
@@ -48,7 +48,7 @@ public class ExpowCellLib implements ExpowCell {
 
 	public static ExpowCellLib getSample() {
 		//
-		return new ExpowCellLib(0, 0, Cell.CELL_TYPE_STRING, "Hello"); 
+		return new ExpowCellLib(0, 0, CellType.STRING, "Hello"); 
 	}
 	
 	@Override
@@ -112,22 +112,22 @@ public class ExpowCellLib implements ExpowCell {
 		String cellTypeStr = ""; 
 		
 		switch(type) {
-		case Cell.CELL_TYPE_BLANK: 
+		case BLANK:  
 			cellTypeStr = "CELL_TYPE_BLANK"; 
 			break; 
-		case Cell.CELL_TYPE_BOOLEAN: 
+		case BOOLEAN: 
 			cellTypeStr = "CELL_TYPE_BOOLEAN"; 
 			break; 
-		case Cell.CELL_TYPE_ERROR:
+		case ERROR:
 			cellTypeStr = "CELL_TYPE_ERROR"; 
 			break; 
-		case Cell.CELL_TYPE_FORMULA: 
+		case FORMULA: 
 			cellTypeStr = "CELL_TYPE_FORMULA"; 
 			break; 
-		case Cell.CELL_TYPE_NUMERIC: 
+		case NUMERIC: 
 			cellTypeStr = "CELL_TYPE_NUMERIC"; 
 			break; 
-		case Cell.CELL_TYPE_STRING: 
+		case STRING: 
 			cellTypeStr = "CELL_TYPE_STRING"; 
 			break; 
 		default: 

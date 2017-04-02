@@ -5,7 +5,7 @@
  * @author <a href="mailto:tsong@nextree.co.kr">Song, Taegook</a>
  * @since 2014. 6. 10.
  */
-package io.namoo.util.expow.lib;
+package io.namoo.expow.lib;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,8 +13,8 @@ import java.util.List;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import io.namoo.util.expow.api.ArraySheet;
-import io.namoo.util.expow.api.XYCoord;
+import io.namoo.expow.api.ArraySheet;
+import io.namoo.expow.api.XYCoord;
 
 public class ArraySheetLib implements ArraySheet {
 	//

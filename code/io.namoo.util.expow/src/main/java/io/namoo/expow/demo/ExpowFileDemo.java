@@ -5,16 +5,16 @@
  * @author <a href="mailto:tsong@nextree.co.kr">Song, Taegook</a>
  * @since 2014. 6. 10.
  */
-package io.namoo.util.expow.demo;
+package io.namoo.expow.demo;
 
 import java.util.Iterator;
 
-import io.namoo.util.expow.api.ExpowCell;
-import io.namoo.util.expow.api.ExpowColumn;
-import io.namoo.util.expow.api.ExpowFile;
-import io.namoo.util.expow.api.ExpowFileReader;
-import io.namoo.util.expow.api.ExpowRow;
-import io.namoo.util.expow.api.ExpowSheet;
+import io.namoo.expow.api.ExpowCell;
+import io.namoo.expow.api.ExpowColumn;
+import io.namoo.expow.api.ExpowFile;
+import io.namoo.expow.api.ExpowFileReader;
+import io.namoo.expow.api.ExpowRow;
+import io.namoo.expow.api.ExpowSheet;
 
 public class ExpowFileDemo {
 	//

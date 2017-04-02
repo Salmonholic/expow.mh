@@ -5,7 +5,7 @@
  * @author <a href="mailto:tsong@nextree.co.kr">Song, Taegook</a>
  * @since 2014. 6. 10.
  */
-package io.namoo.util.expow.lib;
+package io.namoo.expow.lib;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -17,6 +17,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
+
+import io.namoo.expow.lib.ExpowColumnLib;
+import io.namoo.expow.lib.ExpowRowLib;
+import io.namoo.expow.lib.ExpowSheetLib;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ExpowSheetLibTest {

@@ -5,7 +5,7 @@
  * @author <a href="mailto:tsong@nextree.co.kr">Song, Taegook</a>
  * @since 2014. 6. 10.
  */
-package io.namoo.util.expow.api;
+package io.namoo.expow.api;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -14,16 +14,17 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import io.namoo.util.expow.lib.ArrayFileLib;
-import io.namoo.util.expow.lib.ArraySheetLib;
-import io.namoo.util.expow.lib.ExpowCellLib;
-import io.namoo.util.expow.lib.ExpowFileLib;
-import io.namoo.util.expow.lib.ExpowRowLib;
-import io.namoo.util.expow.lib.ExpowSheetLib;
+import io.namoo.expow.lib.ArrayFileLib;
+import io.namoo.expow.lib.ArraySheetLib;
+import io.namoo.expow.lib.ExpowCellLib;
+import io.namoo.expow.lib.ExpowFileLib;
+import io.namoo.expow.lib.ExpowRowLib;
+import io.namoo.expow.lib.ExpowSheetLib;
 
 public class ExpowFileReader {
 	//
@@ -125,9 +126,9 @@ public class ExpowFileReader {
 
 				ExpowCellLib powCell = null; 
 				if(cell == null) {
-					powCell = new ExpowCellLib(rowIndex, columnIndex, Cell.CELL_TYPE_BLANK, ""); 
+					powCell = new ExpowCellLib(rowIndex, columnIndex, CellType.BLANK, ""); 
 				} else {
-					powCell = new ExpowCellLib(rowIndex, columnIndex, cell.getCellType(),
+					powCell = new ExpowCellLib(rowIndex, columnIndex, cell.getCellTypeEnum(),
 							getCellValueAsString(cell));
 				}
 				expowRow.addCell(powCell);
@@ -142,24 +143,28 @@ public class ExpowFileReader {
 	private static String getCellValueAsString(Cell cell) {
 		//
 		String cellValue = "";
-		switch (cell.getCellType()) { 
-		case Cell.CELL_TYPE_BLANK:
+		CellType cellType = cell.getCellTypeEnum(); 
+		switch (cellType) {  
+		case BLANK:
 			cellValue = ""; 
 			break;
-		case Cell.CELL_TYPE_BOOLEAN:
+		case BOOLEAN:
 			cellValue = String.valueOf(cell.getBooleanCellValue());
 			break;
-		case Cell.CELL_TYPE_ERROR:
+		case ERROR:
 			cellValue = "ERROR";
 			break;
-		case Cell.CELL_TYPE_FORMULA:
+		case FORMULA:
 			cellValue = cell.getCellFormula();
 			break;
-		case Cell.CELL_TYPE_NUMERIC:
+		case NUMERIC:
 			cellValue = String.valueOf(cell.getNumericCellValue());
 			break;
-		case Cell.CELL_TYPE_STRING:
+		case STRING:
 			cellValue = cell.getStringCellValue();
+			break;
+		case _NONE:
+			cellValue = "NONE";
 			break;
 		}
 

@@ -5,7 +5,7 @@
  * @author <a href="mailto:tsong@nextree.co.kr">Song, Taegook</a>
  * @since 2014. 6. 10.
  */
-package io.namoo.util.expow.lib;
+package io.namoo.expow.lib;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -14,13 +14,14 @@ import static org.junit.Assert.assertTrue;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
-import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
 import org.junit.Before;
 import org.junit.Test;
 
-import io.namoo.util.expow.api.ExpowCell;
+import io.namoo.expow.api.ExpowCell;
+import io.namoo.expow.lib.ExpowCellLib;
+import io.namoo.expow.lib.ExpowColumnLib;
 
-@SuppressWarnings("deprecation")
 public class ExpowColumnLibTest {
 	//
 	private ExpowColumnLib columnWithSingleCell; 
@@ -30,7 +31,7 @@ public class ExpowColumnLibTest {
 	public void setUp() throws Exception {
 		// 
 		int columnIndex = 0; 
-		int cellType = Cell.CELL_TYPE_STRING;
+		CellType cellType = CellType.STRING;
 		
 		this.columnWithSingleCell = new ExpowColumnLib(columnIndex); 
 		this.columnWithSingleCell.addCell(ExpowCellLib.getSample());
@@ -155,7 +156,7 @@ public class ExpowColumnLibTest {
 	public void testAddCell() throws Exception {
 		//
 		int cellCount = columnWithMultiCells.countCells(); 
-		columnWithMultiCells.addCell(new ExpowCellLib(0, cellCount, Cell.CELL_TYPE_STRING, "AddedCell")); 
+		columnWithMultiCells.addCell(new ExpowCellLib(0, cellCount, CellType.STRING, "AddedCell")); 
 		
 		assertEquals(cellCount+1, columnWithMultiCells.countCells());
 		assertEquals("AddedCell", columnWithMultiCells.requestCell("AddedCell").getValue());

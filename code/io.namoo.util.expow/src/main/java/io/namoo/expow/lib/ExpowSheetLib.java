@@ -5,7 +5,7 @@
  * @author <a href="mailto:tsong@nextree.co.kr">Song, Taegook</a>
  * @since 2014. 6. 10.
  */
-package io.namoo.util.expow.lib;
+package io.namoo.expow.lib;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,10 +13,10 @@ import java.util.List;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import io.namoo.util.expow.api.ExpowCell;
-import io.namoo.util.expow.api.ExpowColumn;
-import io.namoo.util.expow.api.ExpowRow;
-import io.namoo.util.expow.api.ExpowSheet;
+import io.namoo.expow.api.ExpowCell;
+import io.namoo.expow.api.ExpowColumn;
+import io.namoo.expow.api.ExpowRow;
+import io.namoo.expow.api.ExpowSheet;
 
 public class ExpowSheetLib implements ExpowSheet {
 	//

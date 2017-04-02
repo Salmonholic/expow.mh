@@ -5,51 +5,40 @@
  * @author <a href="mailto:tsong@nextree.co.kr">Song, Taegook</a>
  * @since 2014. 6. 10.
  */
-package io.namoo.util.expow.lib;
+package io.namoo.expow.lib;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
-import org.apache.poi.ss.usermodel.Cell;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import io.namoo.util.expow.api.ExpowCell;
-import io.namoo.util.expow.api.ExpowRow;
+import io.namoo.expow.api.ExpowCell;
+import io.namoo.expow.api.ExpowColumn;
 
-public class ExpowRowLib implements ExpowRow {
+public class ExpowColumnLib implements ExpowColumn {
 	//
-	public static final int IndexLimit = 500000; 
-
-	private int rowIndex; 
-	private List<ExpowCell> rowCells; 
+	public static final int IndexLimit = 5000; 
+	
+	private int index; 
+	private List<ExpowCell> columnCells; 
 	 
-	public ExpowRowLib(int rowIndex) {
+	public ExpowColumnLib(int columnIndex) {
 		// 
-		if (rowIndex < 0 || rowIndex > IndexLimit) {
+		if (columnIndex < 0 || columnIndex > IndexLimit) {
 			// 
 			throw new IllegalArgumentException(
 					String.format("Column index is not valid:%d", 
-							rowIndex));
+							columnIndex));
 		}
+		
+		this.index = columnIndex; 
+		this.columnCells = new ArrayList<ExpowCell>(); 
+	} 
 
-		this.rowIndex = rowIndex; 
-		this.rowCells = new ArrayList<ExpowCell>(); 
-	}
- 
-	public static ExpowRowLib getSample(int rowIndex) {
-		// 
-		ExpowRowLib sampleRow = new ExpowRowLib(rowIndex);
-		sampleRow.addCell(new ExpowCellLib(0,Cell.CELL_TYPE_STRING, "Hello"));
-		sampleRow.addCell(new ExpowCellLib(1,Cell.CELL_TYPE_STRING, "My"));
-		sampleRow.addCell(new ExpowCellLib(2,Cell.CELL_TYPE_STRING, "Friend"));
-		 
-		return sampleRow; 
-	}
-	
 	@Override
 	public String toJson() {
 		//
@@ -66,11 +55,16 @@ public class ExpowRowLib implements ExpowRow {
 	@Override
 	public ExpowCell requestCell(String valueStr) {
 		// 
+		if (valueStr == null) {
+			throw new IllegalArgumentException(
+					String.format("Request value should not be null."));
+		}
+		
 		ExpowCell resultCell = null; 
-		for(ExpowCell cell : rowCells) {
+		for(ExpowCell cell : columnCells) {
 			if(cell.getValue().equals(valueStr)) {
 				resultCell = cell; 
-			}
+			} 
 		}
 		
 		if (resultCell == null) {
@@ -78,24 +72,24 @@ public class ExpowRowLib implements ExpowRow {
 					String.format("No such a cell with value:%s", 
 							valueStr)); 
 		}
-
+		
 		return resultCell; 
 	}
-
+	
 	@Override
-	public ExpowCell requestRightCellOf(String valueStr) {
+	public ExpowCell requestUnderCellOf(String valueStr) {
 		// 
 		ExpowCell resultCell = requestCell(valueStr);
-		return requestCell(resultCell.getColumnIndex()+1); 
+		return requestCell(resultCell.getRowIndex()+1); 
 	}
 
 	@Override
-	public ListIterator<ExpowCell> requestCellsIteratorFrom(String valueStr) {
+	public ListIterator<ExpowCell> requestCellsFrom(String valueStr) {
 		// 
 		int targetIndex = -1; 
-		for(ExpowCell cell : rowCells) {
+		for(ExpowCell cell : columnCells) {
 			if(cell.getValue().equals(valueStr)) {
-				targetIndex = cell.getColumnIndex(); 
+				targetIndex = cell.getRowIndex(); 
 				break; 
 			}
 		}
@@ -106,19 +100,23 @@ public class ExpowRowLib implements ExpowRow {
 							valueStr));
 		}
 
-		return rowCells.listIterator(targetIndex+1); 
+		return columnCells.listIterator(targetIndex+1); 
 	}
 	
 	@Override
-	public ListIterator<ExpowCell> requestCellsIterator() {
+	public Iterator<ExpowCell> iteratorOfCells() {
 		// 
-		return rowCells.listIterator(0); 
+		return columnCells.iterator(); 
 	}
 
 	@Override
 	public boolean hasCellValue(String valueStr) {
 		// 
-		for(ExpowCell cell : rowCells) {
+		if (valueStr == null) {
+			throw new IllegalArgumentException("Parameter should not be null."); 
+		}
+		
+		for(ExpowCell cell : columnCells) {
 			if(cell.getValue().equals(valueStr)) {
 				return true; 
 			}
@@ -128,13 +126,13 @@ public class ExpowRowLib implements ExpowRow {
 	}
 	
 	@Override
-	public boolean hasCellValueAt(int columnIndex, String valueStr) {
+	public boolean hasCellValueAt(int rowIndex, String valueStr) {
 		// 
 		if (valueStr == null) {
 			throw new IllegalArgumentException("Can't find the cell with null value."); 
 		}
 		
-		ExpowCell cell = requestCell(columnIndex);  
+		ExpowCell cell = requestCell(rowIndex);  
 		
 		if(cell.getValue().equals(valueStr)) {
 			return true; 
@@ -144,35 +142,35 @@ public class ExpowRowLib implements ExpowRow {
 	}
 
 	@Override
-	public ExpowCell requestCell(int columnIndex) {
+	public ExpowCell requestCell(int rowIndex) {
 		//
-		if (columnIndex >= rowCells.size()) {
+		if (rowIndex < 0 || rowIndex >= columnCells.size()) {
 			throw new IndexOutOfBoundsException(
-					String.format("Request column index(%d) is bigger then cell count(%d)", 
-							columnIndex, 
-							rowCells.size())); 
+					String.format("Requested row index(%d) is out of bound(%d).", 
+							rowIndex, 
+							columnCells.size())); 
 		}
 		
-		return rowCells.get(columnIndex); 
+		return columnCells.get(rowIndex); 
 	}
 	
 	public void addCell(ExpowCell expowCell) {
 		//
 		if (expowCell == null) {
 			throw new IllegalArgumentException("Can't add null(cell)."); 
-		}
-		expowCell.setRowIndex(rowIndex); 
-		rowCells.add(expowCell); 
+		} 
+
+		columnCells.add(expowCell); 
 	}
 	
 	@Override
 	public int countCells() {
 		// 
-		return rowCells.size(); 
+		return columnCells.size(); 
 	}
 	
 	@Override
-	public int getRowIndex() {
-		return rowIndex; 
+	public int getIndex() {
+		return index; 
 	}
 }

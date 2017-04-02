@@ -5,7 +5,7 @@
  * @author <a href="mailto:tsong@nextree.co.kr">Song, Taegook</a>
  * @since 2014. 6. 10.
  */
-package io.namoo.util.expow.lib;
+package io.namoo.expow.lib;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -15,8 +15,8 @@ import java.util.NoSuchElementException;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import io.namoo.util.expow.api.ExpowFile;
-import io.namoo.util.expow.api.ExpowSheet;
+import io.namoo.expow.api.ExpowFile;
+import io.namoo.expow.api.ExpowSheet;
 
 public class ExpowFileLib implements ExpowFile{
 	//

@@ -5,7 +5,7 @@
  * @author <a href="mailto:tsong@nextree.co.kr">Song, Taegook</a>
  * @since 2014. 6. 10.
  */
-package io.namoo.util.expow.lib;
+package io.namoo.expow.lib;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -15,13 +15,14 @@ import static org.junit.Assert.assertTrue;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
-import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
 import org.junit.Before;
 import org.junit.Test;
 
-import io.namoo.util.expow.api.ExpowCell;
+import io.namoo.expow.api.ExpowCell;
+import io.namoo.expow.lib.ExpowCellLib;
+import io.namoo.expow.lib.ExpowRowLib;
 
-@SuppressWarnings("deprecation")
 public class ExpowRowLibTest {
 	// 
 	private ExpowRowLib rowWithSingleCell; 
@@ -32,7 +33,7 @@ public class ExpowRowLibTest {
 		// 
 		int rowIndex = 0; 
 		int columnIndex = 0; 
-		int cellType = Cell.CELL_TYPE_STRING; 
+		CellType cellType = CellType.STRING; 
 		
 		rowWithSingleCell = new ExpowRowLib(rowIndex); 
 		rowWithSingleCell.addCell(ExpowCellLib.getSample()); 
@@ -151,7 +152,7 @@ public class ExpowRowLibTest {
 	@Test
 	public void testAddCell() throws Exception {
 		// 
-		rowWithSingleCell.addCell(new ExpowCellLib(0, 1, Cell.CELL_TYPE_STRING, "AddedCell"));
+		rowWithSingleCell.addCell(new ExpowCellLib(0, 1, CellType.STRING, "AddedCell"));
 		assertTrue(rowWithSingleCell.hasCellValueAt(1, "AddedCell")); 
 	}
 	

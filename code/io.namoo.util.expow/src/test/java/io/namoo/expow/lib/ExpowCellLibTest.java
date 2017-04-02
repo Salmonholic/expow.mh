@@ -5,16 +5,17 @@
  * @author <a href="mailto:tsong@nextree.co.kr">Song, Taegook</a>
  * @since 2014. 6. 10.
  */
-package io.namoo.util.expow.lib;
+package io.namoo.expow.lib;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
 import org.junit.Before;
 import org.junit.Test;
 
-@SuppressWarnings("deprecation")
+import io.namoo.expow.lib.ExpowCellLib;
+
 public class ExpowCellLibTest {
 	//
 	private ExpowCellLib cell; 
@@ -36,7 +37,7 @@ public class ExpowCellLibTest {
 		//
 		int rowIndex = 0; 
 		int columnIndex = 0; 
-		int cellType = Cell.CELL_TYPE_STRING; 
+		CellType cellType = CellType.STRING; 
 		new ExpowCellLib(rowIndex, columnIndex, cellType, null); 
 	}
 
@@ -55,22 +56,22 @@ public class ExpowCellLibTest {
 	@Test
 	public void testGetCellTypeAsStr() throws Exception {
 		//
-		ExpowCellLib cell = new ExpowCellLib(0, 0, Cell.CELL_TYPE_STRING, "StringValue"); 
+		ExpowCellLib cell = new ExpowCellLib(0, 0, CellType.STRING, "StringValue"); 
 		assertEquals("CELL_TYPE_STRING", cell.getCellTypeAsStr());
 		
-		cell = new ExpowCellLib(0, 0, Cell.CELL_TYPE_BLANK, ""); 
+		cell = new ExpowCellLib(0, 0, CellType.BLANK, ""); 
 		assertEquals("CELL_TYPE_BLANK", cell.getCellTypeAsStr());
 
-		cell = new ExpowCellLib(0, 0, Cell.CELL_TYPE_BOOLEAN, "true"); 
+		cell = new ExpowCellLib(0, 0, CellType.BOOLEAN, "true"); 
 		assertEquals("CELL_TYPE_BOOLEAN", cell.getCellTypeAsStr()); 
 
-		cell = new ExpowCellLib(0, 0, Cell.CELL_TYPE_ERROR, ""); 
+		cell = new ExpowCellLib(0, 0, CellType.ERROR, ""); 
 		assertEquals("CELL_TYPE_ERROR", cell.getCellTypeAsStr());
 
-		cell = new ExpowCellLib(0, 0, Cell.CELL_TYPE_FORMULA, ""); 
+		cell = new ExpowCellLib(0, 0, CellType.FORMULA, ""); 
 		assertEquals("CELL_TYPE_FORMULA", cell.getCellTypeAsStr());
 		
-		cell = new ExpowCellLib(0, 0, Cell.CELL_TYPE_NUMERIC, ""); 
+		cell = new ExpowCellLib(0, 0, CellType.NUMERIC, ""); 
 		assertEquals("CELL_TYPE_NUMERIC", cell.getCellTypeAsStr());
 	}
 

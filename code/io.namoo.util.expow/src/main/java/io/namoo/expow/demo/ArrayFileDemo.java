@@ -5,11 +5,11 @@
  * @author <a href="mailto:tsong@nextree.co.kr">Song, Taegook</a>
  * @since 2014. 6. 10.
  */
-package io.namoo.util.expow.demo;
+package io.namoo.expow.demo;
 
-import io.namoo.util.expow.api.ArrayFile;
-import io.namoo.util.expow.api.ArraySheet;
-import io.namoo.util.expow.api.ExpowFileReader;
+import io.namoo.expow.api.ArrayFile;
+import io.namoo.expow.api.ArraySheet;
+import io.namoo.expow.api.ExpowFileReader;
 
 public class ArrayFileDemo {
 	//
