@@ -11,16 +11,16 @@ import java.util.List;
 
 public interface ArraySheet {
 	//
-	public String toJson();
-	public String toPrettyJson(); 
-	public String toPrettyTable(); 
-	public String toPrettyRow(int rowIndex); 
-	public String toPrettyColumn(int columnIndex); 
-	public int getSheetIndex();
-	public String getSheetName();
-	public int countRow();
-	public String requestCellValue(int rowIndex, int columnIndex); 
-	public String[] requestColumnArray(int columnIndex); 
-	public String[] requestRowArray(int rowIndex); 
-	public List<XYCoord> requestValueCoordinates(String cellValue); 
+	String toJson();
+	String toPrettyJson(); 
+	String toPrettyTable(); 
+	String toPrettyRow(int rowIndex); 
+	String toPrettyColumn(int columnIndex); 
+	int getSheetIndex();
+	String getSheetName();
+	int countRow();
+	String requestCellValue(int rowIndex, int columnIndex); 
+	String[] requestColumnArray(int columnIndex); 
+	String[] requestRowArray(int rowIndex); 
+	List<XYCoord> requestValueCoordinates(String cellValue); 
 }

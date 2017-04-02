@@ -17,9 +17,9 @@ import java.util.Iterator;
 import io.namoo.expow.api.ExpowCell;
 import io.namoo.expow.api.ExpowColumn;
 import io.namoo.expow.api.ExpowFile;
-import io.namoo.expow.api.ExpowFileReader;
 import io.namoo.expow.api.ExpowRow;
 import io.namoo.expow.api.ExpowSheet;
+import io.namoo.expow.lib.ExpowFileReader;
 
 public class ExpowFileDemo {
 	//
@@ -52,28 +52,6 @@ public class ExpowFileDemo {
 			System.out.println(rowCell.toString());
 			// System.out.println(rowCell.toJson());
 			
-			//if (!cell.isEmpty()) {
-			//	ExpowRow skillRow = powSheet.requestRowKeyRow(cell.getValue()); 
-			//	ExpowCell rowCell = skillRow.requestCell(cell.getColumnIndex()+2); 
-			// }
 		}
-		
-//		ListIterator<PowCell> cellIter = powSheet.requestAllUnderCellsOf("서버개발자(L39)"); 
-//		while(cellIter.hasNext()) {
-//			System.out.println("--> " + cellIter.next().toString()); 
-//		}
-		
-		// System.out.println(excelSheet.toString()); 
-//		ExpowRow javaRow = excelSheet.requestRowKeyRow("Java"); 
-//		System.out.println(javaRow.toString()); 
-//		ExpowRow umlRow = excelSheet.requestRowKeyRow("UML"); 
-//		System.out.println(umlRow.toString()); 
-//		powSheet.setColumnKey("단위기술"); 
-//		ExpowColumn skillColumn = powSheet.requestColumnKeyColumn("단위기술");
-//		System.out.println(skillColumn.toString()); 
-//		ExpowColumn baseColumn = excelSheet.requestColumnKeyColumn("SW 개발자(L12)");  
-//		System.out.println(baseColumn.toString());
-//		PowCell targetCell = powSheet.requestRightCellOf("Java");
-//		System.out.println(targetCell.toString()); 
 	}
 }

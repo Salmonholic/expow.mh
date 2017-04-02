@@ -9,7 +9,7 @@ package io.namoo.expow.demo;
 
 import io.namoo.expow.api.ArrayFile;
 import io.namoo.expow.api.ArraySheet;
-import io.namoo.expow.api.ExpowFileReader;
+import io.namoo.expow.lib.ExpowFileReader;
 
 public class ArrayFileDemo {
 	//

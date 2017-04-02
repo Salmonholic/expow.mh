@@ -9,14 +9,14 @@ package io.namoo.expow.api;
 
 public interface ExpowCell {
 	//
-	public boolean isEmpty(); 
-	public String toJson();
-	public String toPrettyJson();
-	public int getColumnIndex();
-	public int getRowIndex();
-	public void setRowIndex(int rowIndex); 
-	public String getValue();
-	public double getValueAsDouble(); 
-	public int getValueAsInt(); 
-	public String getCellTypeAsStr();
+	boolean isEmpty(); 
+	String toJson();
+	String toPrettyJson();
+	int getColumnIndex();
+	int getRowIndex();
+	void setRowIndex(int rowIndex); 
+	String getValue();
+	double getValueAsDouble(); 
+	int getValueAsInt(); 
+	String getCellTypeAsStr();
 }

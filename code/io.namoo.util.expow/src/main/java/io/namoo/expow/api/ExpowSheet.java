@@ -9,20 +9,20 @@ package io.namoo.expow.api;
 
 public interface ExpowSheet {
 	//
-	public String toJson();
-	public String toPrettyJson(); 
-	public int getSheetIndex();
-	public int countRow();
-	public void addRow(ExpowRow row); 
-	public int countColumn();
-	public String getSheetName();
-	public String getRowKey(); 
-	public String getColumnKey(); 
-	public void setRowKey(String keyString);
-	public void setColumnKey(String keyString);
-	public ExpowRow requestRowKeyRow(String rowKeyValue);
-	public ExpowColumn requestColumnKeyColumn(String columnKeyValue);
-	public ExpowColumn requestColumnExpanding(int index);
-	public ExpowColumn requestColumn(int index);
-	public ExpowRow requestRow(int index); 
+	String toJson();
+	String toPrettyJson(); 
+	int getSheetIndex();
+	int countRow();
+	void addRow(ExpowRow row); 
+	int countColumn();
+	String getSheetName();
+	String getRowKey(); 
+	String getColumnKey(); 
+	void setRowKey(String keyString);
+	void setColumnKey(String keyString);
+	ExpowRow requestRowKeyRow(String rowKeyValue);
+	ExpowColumn requestColumnKeyColumn(String columnKeyValue);
+	ExpowColumn requestColumnExpanding(int index);
+	ExpowColumn requestColumn(int index);
+	ExpowRow requestRow(int index); 
 }

@@ -12,16 +12,16 @@ import java.util.ListIterator;
 
 public interface ExpowColumn {
 	//
-	public String toJson();
-	public String toPrettyJson();
-	public void addCell(ExpowCell cell); 
-	public boolean hasCellValue(String valueStr);
-	public boolean hasCellValueAt(int rowIndex, String valueStr);
-	public ExpowCell requestCell(int rowIndex);
-	public ExpowCell requestCell(String valueStr);
-	public ExpowCell requestUnderCellOf(String valueStr);
-	public ListIterator<ExpowCell> requestCellsFrom(String valueStr); 
-	public Iterator<ExpowCell> iteratorOfCells(); 
-	public int countCells();
-	public int getIndex();
+	String toJson();
+	String toPrettyJson();
+	void addCell(ExpowCell cell); 
+	boolean hasCellValue(String valueStr);
+	boolean hasCellValueAt(int rowIndex, String valueStr);
+	ExpowCell requestCell(int rowIndex);
+	ExpowCell requestCell(String valueStr);
+	ExpowCell requestUnderCellOf(String valueStr);
+	ListIterator<ExpowCell> requestCellsFrom(String valueStr); 
+	Iterator<ExpowCell> iteratorOfCells(); 
+	int countCells();
+	int getIndex();
 }

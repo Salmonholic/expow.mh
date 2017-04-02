@@ -11,11 +11,11 @@ import java.util.Iterator;
 
 public interface ArrayFile {
 	//
-	public String toJson();
-	public String toPrettyJson();
-	public int countSheet();
-	public String getFileName();
-	public ArraySheet requestSheet(String sheetName);
-	public ArraySheet requestSheet(int sheetIndex); 
-	public Iterator<ArraySheet> iteratorOfSheets(); 
+	String toJson();
+	String toPrettyJson();
+	int countSheet();
+	String getFileName();
+	ArraySheet requestSheet(String sheetName);
+	ArraySheet requestSheet(int sheetIndex); 
+	Iterator<ArraySheet> iteratorOfSheets(); 
 }

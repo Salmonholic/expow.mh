@@ -5,7 +5,7 @@
  * @author <a href="mailto:tsong@nextree.co.kr">Song, Taegook</a>
  * @since 2014. 6. 10.
  */
-package io.namoo.expow.api;
+package io.namoo.expow.lib;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -15,18 +15,14 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import io.namoo.expow.lib.ArrayFileLib;
-import io.namoo.expow.lib.ArraySheetLib;
-import io.namoo.expow.lib.ExpowCellLib;
-import io.namoo.expow.lib.ExpowFileLib;
-import io.namoo.expow.lib.ExpowRowLib;
-import io.namoo.expow.lib.ExpowSheetLib;
+import io.namoo.expow.api.ArrayFile;
+import io.namoo.expow.api.ExpowFile;
+import io.namoo.expow.api.ExpowSheet;
 
 public class ExpowFileReader {
 	//
@@ -34,7 +30,7 @@ public class ExpowFileReader {
 
 	public static ArrayFile readAsArray(String fileName) {
 		// 
-		ArrayFileLib arrayFile = new ArrayFileLib(fileName); 
+		ArrayFile arrayFile = new ArrayFileLib(fileName); 
 		XSSFWorkbook workbook = openWorkbook(fileName);
 		readAllSheetsAsArray(workbook, arrayFile); 
 		closeWorkbook(workbook);
@@ -85,14 +81,14 @@ public class ExpowFileReader {
 		}
 	}
 
-	private static void readAllSheetsAsArray(XSSFWorkbook workbook, ArrayFileLib arrayFile) {
+	private static void readAllSheetsAsArray(XSSFWorkbook workbook, ArrayFile arrayFile) {
 		//
 		int sheetCount = workbook.getNumberOfSheets();
 		for (int index = 0; index < sheetCount; index++) {
 			XSSFSheet sheet = workbook.getSheetAt(index);
 			ArraySheetLib arraySheet = new ArraySheetLib(index, sheet.getSheetName());
 			fillSheetAsArray(sheet, arraySheet);
-			arrayFile.addSheet(arraySheet);
+			((ArrayFileLib)arrayFile).addSheet(arraySheet);
 		}
 	}
 
@@ -126,18 +122,17 @@ public class ExpowFileReader {
 			int lastColumn = row.getLastCellNum(); 
 			for(int columnIndex = 0; columnIndex<lastColumn; columnIndex++) {
 				// 
-				Cell cell = row.getCell(columnIndex, Row.RETURN_BLANK_AS_NULL); 
+				Cell cell = row.getCell(columnIndex, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK); 
 
-				ExpowCellLib powCell = null; 
-				if(cell == null) {
-					powCell = new ExpowCellLib(rowIndex, columnIndex, CellType.BLANK, ""); 
-				} else {
-					powCell = new ExpowCellLib(rowIndex, columnIndex, cell.getCellTypeEnum(),
-							getCellValueAsString(cell));
-				}
+				ExpowCellLib powCell = new ExpowCellLib(
+						rowIndex, 
+						columnIndex, 
+						cell.getCellTypeEnum(), 
+						getCellValueAsString(cell));
 				expowRow.addCell(powCell);
 				expowSheet.requestColumnExpanding(columnIndex).addCell(powCell);
 			}
+			
 			expowSheet.addRow(expowRow);
 			rowIndex++;
 		}
