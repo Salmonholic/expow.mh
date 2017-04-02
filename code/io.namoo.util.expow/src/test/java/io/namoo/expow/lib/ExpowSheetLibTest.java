@@ -9,18 +9,12 @@ package io.namoo.expow.lib;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
-
-import io.namoo.expow.lib.ExpowColumnLib;
-import io.namoo.expow.lib.ExpowRowLib;
-import io.namoo.expow.lib.ExpowSheetLib;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ExpowSheetLibTest {
@@ -98,47 +92,10 @@ public class ExpowSheetLibTest {
 		assertEquals(1, sheetSimple.countColumn());
 	}
 
-	@Test
-	public void testGetRowKey() throws Exception {
-		// 
-		ExpowSheetLib sheetMock = mock(ExpowSheetLib.class); 
-		assertNull(sheetMock.getRowKey()); 
-		
-		when(sheetMock.getRowKey()).thenReturn("key");
-		assertNotNull(sheetMock.getRowKey());
-		assertEquals("key", sheetMock.getRowKey());
-	}
-	
-	@Test
-	public void testSetRowKey() throws Exception {
-		//
-		assertNull(sheetMulti.getRowKey()); 
-		
-		sheetMulti.setRowKey("My");
-		assertNotNull(sheetMulti.getRowKey());
-	}
-
-	@Test(expected=IllegalArgumentException.class)
-	public void testSetRowKeyWithIllegalArgumentException() {
-		//
-		assertNull(sheetMulti.getRowKey());  
-		sheetMulti.setRowKey("NoOne");
-	}
-
-	@Test
-	public void testRequestRowKeyRow() throws Exception {
-		//
-		assertNull(sheetMulti.getRowKey()); 
-		
-		sheetMulti.setRowKey("My");
-		assertNotNull(sheetMulti.requestRowKeyRow("My")); 
-	}
-
 	@Test(expected=IllegalArgumentException.class)
 	public void testRequestRowKeyRowWithIllegalArgumentException() throws Exception {
 		//
-		assertNull(sheetMulti.getRowKey()); 
-		sheetMulti.requestRowKeyRow(null); 
+		sheetMulti.requestRow(null); 
 	}
 
 	@Test
