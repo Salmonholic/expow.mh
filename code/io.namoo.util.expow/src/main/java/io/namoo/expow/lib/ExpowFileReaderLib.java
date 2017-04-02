@@ -22,13 +22,19 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import io.namoo.expow.api.ArrayFile;
 import io.namoo.expow.api.ExpowFile;
+import io.namoo.expow.api.ExpowFileReader;
 import io.namoo.expow.api.ExpowSheet;
 
-public class ExpowFileReader {
+public class ExpowFileReaderLib implements ExpowFileReader {
 	//
 	private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-	public static ArrayFile readAsArray(String fileName) {
+	public ExpowFileReaderLib() {
+		// 
+	}
+	
+	@Override
+	public ArrayFile readAsArray(String fileName) {
 		// 
 		ArrayFile arrayFile = new ArrayFileLib(fileName); 
 		XSSFWorkbook workbook = openWorkbook(fileName);
@@ -38,7 +44,8 @@ public class ExpowFileReader {
 		return arrayFile; 
 	}
 	
-	public static ExpowFile read(String fileName) {
+	@Override
+	public ExpowFile read(String fileName) {
 		//
 		ExpowFileLib expowFile = new ExpowFileLib(fileName); 
 		XSSFWorkbook workbook = openWorkbook(fileName);
@@ -48,7 +55,8 @@ public class ExpowFileReader {
 		return expowFile; 
 	}
 
-	public static ExpowFile read(String fileName, int sheetIndex) {
+	@Override
+	public ExpowFile read(String fileName, int sheetIndex) {
 		// 
 		ExpowFileLib expowFile = new ExpowFileLib(fileName); 
 		XSSFWorkbook workbook = openWorkbook(fileName);
@@ -58,7 +66,8 @@ public class ExpowFileReader {
 		return expowFile; 
 	}
 	
-	public static ExpowFile read(String fileName, int sheetIndex, int startIndex, int endIndex) {
+	@Override
+	public ExpowFile read(String fileName, int sheetIndex, int startIndex, int endIndex) {
 		// 
 		ExpowFileLib expowFile = new ExpowFileLib(fileName); 
 		XSSFWorkbook workbook = openWorkbook(fileName);
@@ -68,7 +77,7 @@ public class ExpowFileReader {
 		return expowFile; 
 	}
 
-	private static XSSFWorkbook openWorkbook(String fileName) {
+	private XSSFWorkbook openWorkbook(String fileName) {
 		//
 		XSSFWorkbook workbook = null;
 		try {
@@ -81,7 +90,7 @@ public class ExpowFileReader {
 		return workbook;
 	}
 
-	private static void closeWorkbook(XSSFWorkbook workbook) {
+	private void closeWorkbook(XSSFWorkbook workbook) {
 		//
 		try {
 			workbook.close();
@@ -90,7 +99,7 @@ public class ExpowFileReader {
 		}
 	}
 
-	private static void readAllSheets(XSSFWorkbook workbook, ExpowFileLib expowFile) {
+	private void readAllSheets(XSSFWorkbook workbook, ExpowFileLib expowFile) {
 		//
 		int sheetCount = workbook.getNumberOfSheets();
 		for (int index = 0; index < sheetCount; index++) {
@@ -101,7 +110,7 @@ public class ExpowFileReader {
 		}
 	}
 
-	private static void readSheet(XSSFWorkbook workbook, ExpowFileLib expowFile, int sheetIndex) {
+	private void readSheet(XSSFWorkbook workbook, ExpowFileLib expowFile, int sheetIndex) {
 		//
 		int sheetCount = workbook.getNumberOfSheets();
 		for (int index = 0; index < sheetCount; index++) {
@@ -117,7 +126,7 @@ public class ExpowFileReader {
 		}
 	}
 
-	private static void readSheet(XSSFWorkbook workbook, ExpowFileLib expowFile, int sheetIndex, int startIndex, int endIndex) {
+	private void readSheet(XSSFWorkbook workbook, ExpowFileLib expowFile, int sheetIndex, int startIndex, int endIndex) {
 		//
 		int sheetCount = workbook.getNumberOfSheets();
 		for (int index = 0; index < sheetCount; index++) {
@@ -133,7 +142,7 @@ public class ExpowFileReader {
 		}
 	}
 
-	private static void readAllSheetsAsArray(XSSFWorkbook workbook, ArrayFile arrayFile) {
+	private void readAllSheetsAsArray(XSSFWorkbook workbook, ArrayFile arrayFile) {
 		//
 		int sheetCount = workbook.getNumberOfSheets();
 		for (int index = 0; index < sheetCount; index++) {
@@ -144,7 +153,7 @@ public class ExpowFileReader {
 		}
 	}
 
-	private static void fillSheetAsArray(XSSFSheet sheet, ArraySheetLib arraySheet) {
+	private void fillSheetAsArray(XSSFSheet sheet, ArraySheetLib arraySheet) {
 		//
 		Iterator<Row> rowIter = sheet.iterator();
 
@@ -162,7 +171,7 @@ public class ExpowFileReader {
 	}
 
 	@SuppressWarnings("deprecation")
-	private static void fillSheet(XSSFSheet sheet, ExpowSheet expowSheet) {
+	private void fillSheet(XSSFSheet sheet, ExpowSheet expowSheet) {
 		//
 		Iterator<Row> rowIter = sheet.iterator();
 
@@ -191,7 +200,7 @@ public class ExpowFileReader {
 	}
 
 	@SuppressWarnings("deprecation")
-	private static void fillSheet(XSSFSheet sheet, ExpowSheet expowSheet, int startIndex, int endIndex) {
+	private void fillSheet(XSSFSheet sheet, ExpowSheet expowSheet, int startIndex, int endIndex) {
 		//
 		Iterator<Row> rowIter = sheet.iterator();
 
@@ -200,7 +209,7 @@ public class ExpowFileReader {
 			if (rowIndex == startIndex) {
 				break; 
 			}
-			Row row = rowIter.next();
+			rowIter.next();
 			rowIndex++; 
 		}
 		
@@ -232,7 +241,7 @@ public class ExpowFileReader {
 	}
 
 	@SuppressWarnings("deprecation")
-	private static String getCellValueAsString(Cell cell) {
+	private String getCellValueAsString(Cell cell) {
 		//
 		String cellValue = "";
 		switch (cell.getCellTypeEnum()) {  

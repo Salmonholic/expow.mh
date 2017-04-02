@@ -17,16 +17,16 @@ import java.util.Iterator;
 import io.namoo.expow.api.ExpowCell;
 import io.namoo.expow.api.ExpowColumn;
 import io.namoo.expow.api.ExpowFile;
+import io.namoo.expow.api.ExpowFileReaderFactory;
 import io.namoo.expow.api.ExpowRow;
 import io.namoo.expow.api.ExpowSheet;
-import io.namoo.expow.lib.ExpowFileReader;
 
 public class ExpowFileDemo {
 	//
 	public static void main(String[] args) { 
 		//
 		String fileName = "./src/test/resources/SkillRoleMap.xlsx";
-		ExpowFile file = ExpowFileReader.read(fileName); 
+		ExpowFile file = ExpowFileReaderFactory.newInstance().read(fileName); 
 		ExpowSheet powSheet = file.requestSheet("SoftwareDevelopment"); 
 		// readColumnTest(powSheet); 
 		readRowTest(powSheet); 

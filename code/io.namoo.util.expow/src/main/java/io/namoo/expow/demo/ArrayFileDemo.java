@@ -9,14 +9,14 @@ package io.namoo.expow.demo;
 
 import io.namoo.expow.api.ArrayFile;
 import io.namoo.expow.api.ArraySheet;
-import io.namoo.expow.lib.ExpowFileReader;
+import io.namoo.expow.api.ExpowFileReaderFactory;
 
 public class ArrayFileDemo {
 	//
 	public static void main(String[] args) { 
 		//
 		String fileName = "./src/test/resources/SkillRoleMap.xlsx";
-		ArrayFile file = ExpowFileReader.readAsArray(fileName); 
+		ArrayFile file = ExpowFileReaderFactory.newInstance().readAsArray(fileName); 
 		ArraySheet arraySheet = file.requestSheet("SoftwareDevelopment"); 
 		
 		//System.out.print(arraySheet.toPrettyTable());
