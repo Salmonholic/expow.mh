@@ -34,7 +34,7 @@ public class ExpowFileDemo {
 	
 	public static void readColumnTest(ExpowSheet powSheet) {
 		//
-		ExpowColumn skillColumn = powSheet.requestColumnKeyColumn("단위기술");
+		ExpowColumn skillColumn = powSheet.requestColumn("단위기술");
 		Iterator<ExpowCell> columnCellIter = skillColumn.requestCellsFrom("단위기술"); 
 		while(columnCellIter.hasNext()) {
 			ExpowCell columnCell = columnCellIter.next(); 
@@ -45,7 +45,7 @@ public class ExpowFileDemo {
 
 	public static void readRowTest(ExpowSheet powSheet) {
 		//
-		ExpowRow roleRow = powSheet.requestRowKeyRow("Java");
+		ExpowRow roleRow = powSheet.requestRow("Java");
 		Iterator<ExpowCell> rowCellIter = roleRow.requestCellsIteratorFrom("Java");
 		while(rowCellIter.hasNext()) {
 			ExpowCell rowCell = rowCellIter.next(); 

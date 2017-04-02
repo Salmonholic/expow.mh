@@ -13,16 +13,12 @@ public interface ExpowSheet {
 	String toPrettyJson(); 
 	int getSheetIndex();
 	int countRow();
-	void addRow(ExpowRow row); 
 	int countColumn();
+	void addRow(ExpowRow row); 
 	String getSheetName();
-	String getRowKey(); 
-	String getColumnKey(); 
-	void setRowKey(String keyString);
-	void setColumnKey(String keyString);
-	ExpowRow requestRowKeyRow(String rowKeyValue);
-	ExpowColumn requestColumnKeyColumn(String columnKeyValue);
-	ExpowColumn requestColumnExpanding(int index);
-	ExpowColumn requestColumn(int index);
 	ExpowRow requestRow(int index); 
+	ExpowRow requestRow(String rowKey);
+	ExpowColumn requestColumn(int index);
+	ExpowColumn requestColumn(String columnKey);
+	ExpowColumn requestColumnExpanding(int index);
 }

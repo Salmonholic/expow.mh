@@ -87,18 +87,7 @@ public class ExpowSheetLib implements ExpowSheet {
 	public int countColumn() {
 		return columns.size(); 
 	}
-	
-	@Override
-	public String getRowKey() {
-		return rowKey; 
-	}
-	
-	@Override
-	public String getColumnKey() {
-		return columnKey; 
-	}
-	
-	@Override
+
 	public void setRowKey(String keyString) {
 		// 
 		this.rowKey = keyString;  
@@ -113,7 +102,6 @@ public class ExpowSheetLib implements ExpowSheet {
 		}
 	}
 	
-	@Override
 	public void setColumnKey(String keyString) {
 		// 
 		this.columnKey = keyString; 
@@ -130,39 +118,39 @@ public class ExpowSheetLib implements ExpowSheet {
 	}
  
 	@Override
-	public ExpowRow requestRowKeyRow(String rowKeyValue) {
+	public ExpowRow requestRow(String rowKey) {
 		// 
 		this.initialize();
 		
 		if (rowKey == null) { 
 			// 
-			this.setRowKey(rowKeyValue);
+			this.setRowKey(rowKey);
 			
 			if (rowKey == null) {
 				throw new IllegalArgumentException(
-						String.format("Key string is not specified for %s.", rowKeyValue)); 
+						String.format("Key string is not specified for %s.", rowKey)); 
 			}
 		}
 		
-		return this.findRowInColumnValue(rowKeyColumnIndex, rowKeyValue);
+		return this.findRowInColumnValue(rowKeyColumnIndex, rowKey);
 	}
 
 	@Override
-	public ExpowColumn requestColumnKeyColumn(String columnKeyValue) {
+	public ExpowColumn requestColumn(String columnKey) {
 		// 
 		this.initialize();
 
 		if (columnKey == null) {
 			// 
-			this.setColumnKey(columnKeyValue); 
+			this.setColumnKey(columnKey); 
 			
 			if (columnKey == null) {
 				throw new RuntimeException(
-						String.format("Key string is not specified for %s.", columnKeyValue)); 
+						String.format("Key string is not specified for %s.", columnKey)); 
 			}
 		}
 		
-		return this.findColumnInRowValue(columnKeyRowIndex, columnKeyValue);
+		return this.findColumnInRowValue(columnKeyRowIndex, columnKey);
 	}
 
 	@Override
