@@ -18,7 +18,4 @@ public interface ExpowFileWriter {
     
     void write(String fileName, ExpowFile file);
     
-    void write(String fileName, ExpowSheet sheet);
-    
-    void write(String fileName, int sheetIndex, int startIndex, int endIndex, List<ExpowRow> rows);
 }

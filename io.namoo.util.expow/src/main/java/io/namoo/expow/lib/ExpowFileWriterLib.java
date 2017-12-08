@@ -1,15 +1,8 @@
-/*******************************************************************************
- * Copyright(c) 2015-2020 Incheon International Airport Corporation. 
- * All rights reserved. This software is the proprietary information of 
- * Incheon International Airport Corporation.
- *******************************************************************************/
 package io.namoo.expow.lib;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.List;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
@@ -20,8 +13,6 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import io.namoo.expow.api.ArraySheet;
 import io.namoo.expow.api.ExpowCell;
 import io.namoo.expow.api.ExpowFile;
-import io.namoo.expow.api.ExpowFileReader;
-import io.namoo.expow.api.ExpowFileReaderFactory;
 import io.namoo.expow.api.ExpowFileWriter;
 import io.namoo.expow.api.ExpowRow;
 import io.namoo.expow.api.ExpowSheet;
@@ -33,18 +24,13 @@ import io.namoo.expow.api.ExpowSheet;
  */
 public class ExpowFileWriterLib implements ExpowFileWriter {
     //
-    private ExpowFileReader reader;
-    private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-    
     public ExpowFileWriterLib() {
         //
-        this.reader = ExpowFileReaderFactory.newInstance();
     }
     
     @Override
     public void writeAsArray(ArraySheet arraySheet) {
-        //
-        
+        // not yet
     }
 
     @Override
@@ -61,20 +47,6 @@ public class ExpowFileWriterLib implements ExpowFileWriter {
         catch (IOException e) {
             e.printStackTrace();
         } 
-    }
-
-    @Override
-    public void write(String fileName, ExpowSheet sheet) {
-        //
-        ExpowFile oldFile  = reader.read(fileName);
-        int sheetIndex = sheet.getSheetIndex();
-        ExpowSheet oldSheet = oldFile.requestSheet(sheetIndex);
-    }
-
-    @Override
-    public void write(String fileName, int sheetIndex, int startIndex, int endIndex, List<ExpowRow> rows) {
-        // TODO Auto-generated method stub
-        
     }
     
     private XSSFWorkbook converToWorkbook(ExpowFile file) {
@@ -109,7 +81,6 @@ public class ExpowFileWriterLib implements ExpowFileWriter {
         return sheet;
     }
     
-    @SuppressWarnings("deprecation")
     private CellType getCellType(ExpowCell cell) {
         //
         CellType cellType = CellType._NONE;
